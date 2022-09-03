@@ -1,7 +1,11 @@
 package com.github.toricor.currentlocationsample
 
+import android.Manifest.permission.ACCESS_COARSE_LOCATION
+import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.app.Activity
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,15 +15,48 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.app.ActivityCompat
+import androidx.lifecycle.lifecycleScope
 import com.github.toricor.currentlocationsample.ui.theme.CurrentLocationSampleTheme
 import com.google.android.gms.common.GoogleApiAvailability
+import com.google.android.gms.location.LocationServices
 
 const val GOOGLE_PLAY_SERVICES_VALIDATION = 1
+const val GRANT_LOCATION_PERMISSION = 2
 
 class MainActivity : ComponentActivity() {
+    private var lat: Double = 0.0
+    private var lng: Double = 0.0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         validateGooglePlayServices(this)
+
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, ACCESS_FINE_LOCATION)) {
+                // TODO: show UI
+                Log.d("MainActivity@", "shouldShowRequestPermissionRationale")
+            } else {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION),
+                    GRANT_LOCATION_PERMISSION
+                )
+            }
+        } else {
+            lifecycleScope.launchWhenResumed {
+                val locationProviderClient =
+                    LocationServices.getFusedLocationProviderClient(this@MainActivity)
+                val locationPayload: LocationPayload =
+                    GeoLocation(locationProviderClient).getLastLocation()
+                lat = locationPayload.lat
+                lng = locationPayload.lng
+            }
+        }
 
         setContent {
             CurrentLocationSampleTheme {
@@ -28,7 +65,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    Greeting(lat, lng)
                 }
             }
         }
@@ -49,16 +86,15 @@ class MainActivity : ComponentActivity() {
 }
 
 
-
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+fun Greeting(lat: Double, lng: Double) {
+    Text(text = "lat: $lat \nlng: $lng")
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     CurrentLocationSampleTheme {
-        Greeting("Android")
+        Greeting(35.6809591, 139.7673068)
     }
 }
