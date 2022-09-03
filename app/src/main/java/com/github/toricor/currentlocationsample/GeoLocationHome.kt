@@ -48,9 +48,9 @@ fun GeoLocationHome(
                 GRANT_LOCATION_PERMISSION
             )
         }
-    } else {
-        StatefulGeoLocation(activity, viewModel, modifier)
     }
+    StatefulGeoLocation(activity, viewModel, modifier)
+
 }
 
 @Composable
