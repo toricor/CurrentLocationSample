@@ -9,16 +9,17 @@ import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.CompletableDeferred
 
-class GeoLocation(private val locationProvider: FusedLocationProviderClient) {
+class GeoLocationResource(private val locationProvider: FusedLocationProviderClient) {
     @SuppressLint("MissingPermission")
     suspend fun getLastLocation(): LocationPayload {
         val def = CompletableDeferred<LocationPayload>()
         val locationTask: Task<Location> = locationProvider.lastLocation
 
         locationTask.addOnSuccessListener { location: Location? ->
+            Log.d("GeoLocationResource@getLastLocation: ", location.toString())
             def.complete(
                 if (location == null) {
-                    getEmptyLocationPayload()
+                    GeoLocationUtil.getEmptyLocationPayload()
                 } else {
                     LocationPayload(
                         lat = location.latitude,
@@ -28,7 +29,7 @@ class GeoLocation(private val locationProvider: FusedLocationProviderClient) {
             )
         }
         locationTask.addOnFailureListener {
-            def.complete(getEmptyLocationPayload())
+            def.complete(GeoLocationUtil.getEmptyLocationPayload())
         }
         return def.await()
     }
@@ -42,10 +43,10 @@ class GeoLocation(private val locationProvider: FusedLocationProviderClient) {
         )
 
         locationTask.addOnSuccessListener { location: Location? ->
-            Log.d("GeoLocation@", location.toString())
+            Log.d("GeoLocationResource@getCurrentLocation", location.toString())
             def.complete(
                 if (location == null) {
-                    getEmptyLocationPayload()
+                    GeoLocationUtil.getEmptyLocationPayload()
                 } else {
                     LocationPayload(
                         lat = location.latitude,
@@ -65,7 +66,4 @@ class GeoLocation(private val locationProvider: FusedLocationProviderClient) {
         }
     }
 
-    private fun getEmptyLocationPayload(): LocationPayload {
-        return LocationPayload(0.0, 0.0)
-    }
 }
