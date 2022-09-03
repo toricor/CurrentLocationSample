@@ -50,7 +50,6 @@ fun GeoLocationHome(
         }
     }
     StatefulGeoLocation(activity, viewModel, modifier)
-
 }
 
 @Composable
@@ -59,7 +58,7 @@ fun StatefulGeoLocation(
     viewModel: GeoLocationHomeViewModel,
     modifier: Modifier = Modifier
 ) {
-    val locationPayload = getLocationPayload(viewModel)
+    val locationPayload = getValidLocationPayload(viewModel)
 
     StatelessGeoLocation(
         latitude = locationPayload.latitude,
@@ -74,7 +73,7 @@ fun StatefulGeoLocation(
 }
 
 @Composable
-private fun getLocationPayload(viewModel: GeoLocationHomeViewModel) : LocationPayload {
+private fun getValidLocationPayload(viewModel: GeoLocationHomeViewModel) : LocationPayload {
     val rawLocationPayload by viewModel.locationPayload.observeAsState()
     return rawLocationPayload ?: viewModel.getEmptyLocationPayload()
 }
