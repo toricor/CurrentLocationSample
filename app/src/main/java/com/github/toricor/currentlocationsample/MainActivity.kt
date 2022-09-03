@@ -1,5 +1,6 @@
 package com.github.toricor.currentlocationsample
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -11,10 +12,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.github.toricor.currentlocationsample.ui.theme.CurrentLocationSampleTheme
+import com.google.android.gms.common.GoogleApiAvailability
+
+const val GOOGLE_PLAY_SERVICES_VALIDATION = 1
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        validateGooglePlayServices(this)
+
         setContent {
             CurrentLocationSampleTheme {
                 // A surface container using the 'background' color from the theme
@@ -27,7 +33,22 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+    private fun validateGooglePlayServices(activity: Activity) {
+        GoogleApiAvailability.getInstance().apply {
+            val errorCode: Int = isGooglePlayServicesAvailable(activity)
+            showErrorDialogFragment(
+                activity,
+                errorCode,
+                GOOGLE_PLAY_SERVICES_VALIDATION,
+            ) {
+                activity.finish()
+            }
+        }
+    }
 }
+
+
 
 @Composable
 fun Greeting(name: String) {
