@@ -25,13 +25,43 @@ const val GOOGLE_PLAY_SERVICES_VALIDATION = 1
 const val GRANT_LOCATION_PERMISSION = 2
 
 class MainActivity : ComponentActivity() {
-    private var lat: Double = 0.0
-    private var lng: Double = 0.0
+    private var currentLatitude: Double = 0.0
+    private var currentLongitude: Double = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         validateGooglePlayServices(this)
 
+
+
+        setContent {
+            CurrentLocationSampleTheme {
+                // A surface container using the 'background' color from the theme
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colors.background
+                ) {
+                    Greeting(currentLatitude, currentLongitude)
+                }
+            }
+        }
+    }
+
+    private fun validateGooglePlayServices(activity: Activity) {
+        GoogleApiAvailability.getInstance().apply {
+            val errorCode: Int = isGooglePlayServicesAvailable(activity)
+            showErrorDialogFragment(
+                activity,
+                errorCode,
+                GOOGLE_PLAY_SERVICES_VALIDATION,
+            ) {
+                activity.finish()
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
         if (ActivityCompat.checkSelfPermission(
                 this,
                 ACCESS_FINE_LOCATION
@@ -52,38 +82,18 @@ class MainActivity : ComponentActivity() {
                 val locationProviderClient =
                     LocationServices.getFusedLocationProviderClient(this@MainActivity)
                 val locationPayload: LocationPayload =
-                    GeoLocation(locationProviderClient).getLastLocation()
-                lat = locationPayload.lat
-                lng = locationPayload.lng
-            }
-        }
-
-        setContent {
-            CurrentLocationSampleTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    Greeting(lat, lng)
-                }
+                    GeoLocation(locationProviderClient).getCurrentLocation()
+                currentLatitude = locationPayload.lat
+                currentLongitude = locationPayload.lng
             }
         }
     }
 
-    private fun validateGooglePlayServices(activity: Activity) {
-        GoogleApiAvailability.getInstance().apply {
-            val errorCode: Int = isGooglePlayServicesAvailable(activity)
-            showErrorDialogFragment(
-                activity,
-                errorCode,
-                GOOGLE_PLAY_SERVICES_VALIDATION,
-            ) {
-                activity.finish()
-            }
-        }
+    override fun onPause() {
+        super.onPause()
     }
 }
+
 
 
 @Composable
