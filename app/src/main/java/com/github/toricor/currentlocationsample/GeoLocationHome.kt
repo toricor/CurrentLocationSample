@@ -6,8 +6,6 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.util.Log
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.Text
@@ -61,26 +59,44 @@ fun StatefulGeoLocation(
     viewModel: GeoLocationHomeViewModel,
     modifier: Modifier = Modifier
 ) {
-    val locationPayload by viewModel.locationPayload.observeAsState()
+    val locationPayload = getLocationPayload(viewModel)
 
     StatelessGeoLocation(
-        lat = locationPayload?.lat ?: 0.0,
-        lng = locationPayload?.lng ?: 0.0,
+        latitude = locationPayload.latitude,
+        longitude = locationPayload.longitude,
+        accuracy = locationPayload.accuracy,
+        time = locationPayload.time,
+        speed = locationPayload.speed,
+        mocked = locationPayload.mocked,
         onClick = { viewModel.updateCurrentLocation(context) },
         modifier = modifier,
     )
 }
 
 @Composable
+private fun getLocationPayload(viewModel: GeoLocationHomeViewModel) : LocationPayload {
+    val rawLocationPayload by viewModel.locationPayload.observeAsState()
+    return rawLocationPayload ?: viewModel.getEmptyLocationPayload()
+}
+
+@Composable
 fun StatelessGeoLocation(
-    lat: Double,
-    lng: Double,
+    latitude: Double,
+    longitude: Double,
+    accuracy: Float,
+    time: Long,
+    speed: Float,
+    mocked: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier.padding(16.dp)) {
-        Text(text = "lat: $lat")
-        Text(text = "lng: $lng")
+        Text(text = "latitude: $latitude")
+        Text(text = "longitude: $longitude")
+        Text(text = "accuracy: $accuracy")
+        Text(text = "time: $time")
+        Text(text = "speed: $speed")
+        Text(text = "mocked: $mocked")
         Button(
             onClick = onClick,
             Modifier.padding(top = 8.dp)
@@ -94,6 +110,14 @@ fun StatelessGeoLocation(
 @Composable
 fun GeoLocationPreview() {
     CurrentLocationSampleTheme {
-        StatelessGeoLocation(35.6809591, 139.7673068, {})
+        StatelessGeoLocation(
+            latitude = 35.6809591,
+            longitude = 139.7673068,
+            accuracy = 12.589F,
+            time = 1662194662614,
+            speed = 50.03244F,
+            mocked = false,
+            onClick = {},
+        )
     }
 }

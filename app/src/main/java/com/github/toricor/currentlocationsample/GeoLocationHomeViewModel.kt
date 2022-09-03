@@ -10,7 +10,7 @@ import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.launch
 
 class GeoLocationHomeViewModel: ViewModel() {
-    private val _locationPayload = MutableLiveData<LocationPayload>(GeoLocationUtil.getEmptyLocationPayload())
+    private val _locationPayload = MutableLiveData<LocationPayload>(getEmptyLocationPayload())
     val locationPayload: LiveData<LocationPayload>
         get() = _locationPayload
 
@@ -24,6 +24,10 @@ class GeoLocationHomeViewModel: ViewModel() {
         viewModelScope.launch {
             _locationPayload.value = GeoLocationResource(getFusedLocationProviderClient(context)).getLastLocation()
         }
+    }
+
+    fun getEmptyLocationPayload() : LocationPayload {
+        return GeoLocationUtil.getEmptyLocationPayload()
     }
 
     private fun getFusedLocationProviderClient(context: Context) : FusedLocationProviderClient {

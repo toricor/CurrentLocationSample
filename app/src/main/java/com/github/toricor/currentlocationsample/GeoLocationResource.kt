@@ -2,6 +2,7 @@ package com.github.toricor.currentlocationsample
 
 import android.annotation.SuppressLint
 import android.location.Location
+import android.os.Build
 import android.util.Log
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.Priority
@@ -10,6 +11,7 @@ import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.CompletableDeferred
 
 class GeoLocationResource(private val locationProvider: FusedLocationProviderClient) {
+
     @SuppressLint("MissingPermission")
     suspend fun getLastLocation(): LocationPayload {
         val def = CompletableDeferred<LocationPayload>()
@@ -21,10 +23,7 @@ class GeoLocationResource(private val locationProvider: FusedLocationProviderCli
                 if (location == null) {
                     GeoLocationUtil.getEmptyLocationPayload()
                 } else {
-                    LocationPayload(
-                        lat = location.latitude,
-                        lng = location.longitude,
-                    )
+                    buildLocationPayload(location)
                 }
             )
         }
@@ -48,10 +47,7 @@ class GeoLocationResource(private val locationProvider: FusedLocationProviderCli
                 if (location == null) {
                     GeoLocationUtil.getEmptyLocationPayload()
                 } else {
-                    LocationPayload(
-                        lat = location.latitude,
-                        lng = location.longitude,
-                    )
+                    buildLocationPayload(location)
                 }
             )
         }
@@ -66,4 +62,19 @@ class GeoLocationResource(private val locationProvider: FusedLocationProviderCli
         }
     }
 
+    @Suppress("DEPRECATION")
+    private fun buildLocationPayload(location: Location): LocationPayload {
+        return LocationPayload(
+            latitude = location.latitude,
+            longitude = location.longitude,
+            accuracy = location.accuracy,
+            time = location.time,
+            speed = if (!location.speed.isNaN()) location.speed else 0.0F,
+            mocked = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                location.isMock
+            } else {
+                location.isFromMockProvider
+            },
+        )
+    }
 }
