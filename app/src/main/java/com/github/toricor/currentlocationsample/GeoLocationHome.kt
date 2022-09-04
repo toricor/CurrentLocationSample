@@ -3,6 +3,8 @@ package com.github.toricor.currentlocationsample
 import android.Manifest
 import android.app.Activity
 import android.content.pm.PackageManager
+import android.content.res.Configuration.UI_MODE_NIGHT_MASK
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -103,10 +105,32 @@ fun StatelessGeoLocation(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(
+    showBackground = true,
+    group = "GeoLocationHome",
+)
 @Composable
 fun GeoLocationPreview() {
     CurrentLocationSampleTheme {
+        StatelessGeoLocation(
+            latitude = 35.6809591,
+            longitude = 139.7673068,
+            accuracy = 12.589F,
+            time = 1662194662614,
+            speed = 50.03244F,
+            mocked = false,
+            onClick = {},
+        )
+    }
+}
+
+@Preview(
+    showBackground = true,
+    group = "GeoLocationHome",
+)
+@Composable
+fun GeoLocationDarkPreview() {
+    CurrentLocationSampleTheme(darkTheme = true) {
         StatelessGeoLocation(
             latitude = 35.6809591,
             longitude = 139.7673068,
