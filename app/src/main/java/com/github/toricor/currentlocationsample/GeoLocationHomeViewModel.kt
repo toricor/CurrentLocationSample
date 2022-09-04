@@ -1,37 +1,30 @@
 package com.github.toricor.currentlocationsample
 
-import android.content.Context
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.google.android.gms.location.FusedLocationProviderClient
+import android.app.Application
+import androidx.lifecycle.*
 import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.launch
 
-class GeoLocationHomeViewModel: ViewModel() {
+class GeoLocationHomeViewModel(application: Application): AndroidViewModel(application) {
+    private val geoLocationRepository = GeoLocationRepository(LocationServices.getFusedLocationProviderClient(application.applicationContext))
+
     private val _locationPayload = MutableLiveData<LocationPayload>(getEmptyLocationPayload())
     val locationPayload: LiveData<LocationPayload>
         get() = _locationPayload
 
-    fun updateCurrentLocation(context: Context) {
+    fun updateCurrentLocation() {
         viewModelScope.launch {
-            _locationPayload.value = GeoLocationResource(getFusedLocationProviderClient(context)).getCurrentLocation()
+            _locationPayload.value = geoLocationRepository.getCurrentLocation()
         }
     }
 
-    fun updateLastLocation(context: Context) {
+    fun updateLastLocation() {
         viewModelScope.launch {
-            _locationPayload.value = GeoLocationResource(getFusedLocationProviderClient(context)).getLastLocation()
+            _locationPayload.value = geoLocationRepository.getLastLocation()
         }
     }
 
     fun getEmptyLocationPayload() : LocationPayload {
         return GeoLocationUtil.getEmptyLocationPayload()
     }
-
-    private fun getFusedLocationProviderClient(context: Context) : FusedLocationProviderClient {
-        return LocationServices.getFusedLocationProviderClient(context)
-    }
-
 }

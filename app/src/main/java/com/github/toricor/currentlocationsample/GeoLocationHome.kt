@@ -2,7 +2,6 @@ package com.github.toricor.currentlocationsample
 
 import android.Manifest
 import android.app.Activity
-import android.content.Context
 import android.content.pm.PackageManager
 import android.util.Log
 import androidx.compose.foundation.layout.Column
@@ -11,8 +10,6 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.saveable.mapSaver
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
@@ -54,13 +51,12 @@ fun GeoLocationHome(
     val rawLocationPayload by viewModel.locationPayload.observeAsState()
     val locationPayload = rawLocationPayload ?: viewModel.getEmptyLocationPayload()
     val geoLocationHomeState = rememberGeoLocationHomeState(locationPayload)
-    StatefulGeoLocation(modifier, activity, viewModel, geoLocationHomeState)
+    StatefulGeoLocation(modifier, viewModel, geoLocationHomeState)
 }
 
 @Composable
 fun StatefulGeoLocation(
     modifier: Modifier = Modifier,
-    context: Context,
     viewModel: GeoLocationHomeViewModel,
     state: GeoLocationHomeState = rememberGeoLocationHomeState(viewModel.getEmptyLocationPayload()),
 ) {
@@ -73,7 +69,9 @@ fun StatefulGeoLocation(
         time = locationPayload.time,
         speed = locationPayload.speed,
         mocked = locationPayload.mocked,
-        onClick = { viewModel.updateCurrentLocation(context) },
+        onClick = {
+            viewModel.updateCurrentLocation()
+        },
         modifier = modifier,
     )
 }
