@@ -11,6 +11,8 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.saveable.mapSaver
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
@@ -49,16 +51,20 @@ fun GeoLocationHome(
             )
         }
     }
-    StatefulGeoLocation(activity, viewModel, modifier)
+    val rawLocationPayload by viewModel.locationPayload.observeAsState()
+    val locationPayload = rawLocationPayload ?: viewModel.getEmptyLocationPayload()
+    val geoLocationHomeState = rememberGeoLocationHomeState(locationPayload)
+    StatefulGeoLocation(modifier, activity, viewModel, geoLocationHomeState)
 }
 
 @Composable
 fun StatefulGeoLocation(
+    modifier: Modifier = Modifier,
     context: Context,
     viewModel: GeoLocationHomeViewModel,
-    modifier: Modifier = Modifier
+    state: GeoLocationHomeState = rememberGeoLocationHomeState(viewModel.getEmptyLocationPayload()),
 ) {
-    val locationPayload = getValidLocationPayload(viewModel)
+    val locationPayload = state.location
 
     StatelessGeoLocation(
         latitude = locationPayload.latitude,
@@ -70,12 +76,6 @@ fun StatefulGeoLocation(
         onClick = { viewModel.updateCurrentLocation(context) },
         modifier = modifier,
     )
-}
-
-@Composable
-private fun getValidLocationPayload(viewModel: GeoLocationHomeViewModel) : LocationPayload {
-    val rawLocationPayload by viewModel.locationPayload.observeAsState()
-    return rawLocationPayload ?: viewModel.getEmptyLocationPayload()
 }
 
 @Composable
