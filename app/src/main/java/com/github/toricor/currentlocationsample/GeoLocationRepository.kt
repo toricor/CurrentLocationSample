@@ -10,7 +10,7 @@ import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.CompletableDeferred
 
-class GeoLocationResource(private val locationProvider: FusedLocationProviderClient) {
+class GeoLocationRepository(private val locationProvider: FusedLocationProviderClient) {
 
     @SuppressLint("MissingPermission")
     suspend fun getLastLocation(): LocationPayload {
@@ -18,17 +18,17 @@ class GeoLocationResource(private val locationProvider: FusedLocationProviderCli
         val locationTask: Task<Location> = locationProvider.lastLocation
 
         locationTask.addOnSuccessListener { location: Location? ->
-            Log.d("GeoLocationResource@getLastLocation: ", location.toString())
+            Log.d("GeoLocationRepository@getLastLocation: ", location.toString())
             def.complete(
                 if (location == null) {
-                    GeoLocationUtil.getEmptyLocationPayload()
+                    getEmptyLocationPayload()
                 } else {
                     buildLocationPayload(location)
                 }
             )
         }
         locationTask.addOnFailureListener {
-            def.complete(GeoLocationUtil.getEmptyLocationPayload())
+            def.complete(getEmptyLocationPayload())
         }
         return def.await()
     }
@@ -42,10 +42,10 @@ class GeoLocationResource(private val locationProvider: FusedLocationProviderCli
         )
 
         locationTask.addOnSuccessListener { location: Location? ->
-            Log.d("GeoLocationResource@getCurrentLocation", location.toString())
+            Log.d("GeoLocationRepository@getCurrentLocation", location.toString())
             def.complete(
                 if (location == null) {
-                    GeoLocationUtil.getEmptyLocationPayload()
+                    getEmptyLocationPayload()
                 } else {
                     buildLocationPayload(location)
                 }
@@ -76,5 +76,9 @@ class GeoLocationResource(private val locationProvider: FusedLocationProviderCli
                 location.isFromMockProvider
             },
         )
+    }
+
+    private fun getEmptyLocationPayload(): LocationPayload {
+        return GeoLocationUtil.getEmptyLocationPayload()
     }
 }

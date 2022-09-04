@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    GeoLocationHome(viewModel = GeoLocationHomeViewModel())
+                    GeoLocationHome(viewModel = GeoLocationHomeViewModel(application))
                 }
             }
         }
