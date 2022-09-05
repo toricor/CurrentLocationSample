@@ -1,0 +1,11 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.github.toricor.currentlocationsample">
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
+    <application>
+
+    </application>
+
+</manifest>
