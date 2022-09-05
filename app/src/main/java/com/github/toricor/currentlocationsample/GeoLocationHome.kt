@@ -3,8 +3,6 @@ package com.github.toricor.currentlocationsample
 import android.Manifest
 import android.app.Activity
 import android.content.pm.PackageManager
-import android.content.res.Configuration.UI_MODE_NIGHT_MASK
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -53,14 +51,14 @@ fun GeoLocationHome(
     val rawLocationPayload by viewModel.locationPayload.observeAsState()
     val locationPayload = rawLocationPayload ?: viewModel.getEmptyLocationPayload()
     val geoLocationHomeState = rememberGeoLocationHomeState(locationPayload)
-    StatefulGeoLocation(modifier, viewModel, geoLocationHomeState)
+    StatefulGeoLocation(modifier, geoLocationHomeState) { viewModel.updateCurrentLocation() }
 }
 
 @Composable
 fun StatefulGeoLocation(
     modifier: Modifier = Modifier,
-    viewModel: GeoLocationHomeViewModel,
-    state: GeoLocationHomeState = rememberGeoLocationHomeState(viewModel.getEmptyLocationPayload()),
+    state: GeoLocationHomeState,
+    onClick: () -> Unit,
 ) {
     val locationPayload = state.location
 
@@ -71,9 +69,7 @@ fun StatefulGeoLocation(
         time = locationPayload.time,
         speed = locationPayload.speed,
         mocked = locationPayload.mocked,
-        onClick = {
-            viewModel.updateCurrentLocation()
-        },
+        onClick = onClick,
         modifier = modifier,
     )
 }
