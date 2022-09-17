@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.location.Location
 import android.os.Build
 import android.util.Log
+import com.google.android.gms.location.CurrentLocationRequest
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
@@ -11,6 +12,12 @@ import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.CompletableDeferred
 
 class GeoLocationRepository(private val locationProvider: FusedLocationProviderClient) {
+
+    private val currentLocationRequest = CurrentLocationRequest.Builder().apply {
+        setPriority(Priority.PRIORITY_HIGH_ACCURACY)
+        setDurationMillis(1000L)
+        setMaxUpdateAgeMillis(30000L)
+    }.build()
 
     @SuppressLint("MissingPermission")
     suspend fun getLastLocation(): LocationPayload {
@@ -38,7 +45,7 @@ class GeoLocationRepository(private val locationProvider: FusedLocationProviderC
         val def = CompletableDeferred<LocationPayload>()
         val cancellationTokenSource = CancellationTokenSource()
         val locationTask: Task<Location> = locationProvider.getCurrentLocation(
-            Priority.PRIORITY_HIGH_ACCURACY, cancellationTokenSource.token
+            currentLocationRequest, cancellationTokenSource.token
         )
 
         locationTask.addOnSuccessListener { location: Location? ->
