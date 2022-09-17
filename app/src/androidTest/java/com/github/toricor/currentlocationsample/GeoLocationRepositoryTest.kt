@@ -3,7 +3,6 @@ package com.github.toricor.currentlocationsample
 import android.Manifest
 import android.content.Context
 import android.location.Location
-import android.location.LocationManager
 import android.os.SystemClock
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.GrantPermissionRule
