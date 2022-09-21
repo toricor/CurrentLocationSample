@@ -1,9 +1,8 @@
 package com.github.toricor.currentlocationsample
 
 import android.Manifest
-import android.app.Activity
-import android.content.pm.PackageManager
 import android.util.Log
+import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
@@ -11,10 +10,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.core.app.ActivityCompat
 import com.github.toricor.currentlocationsample.ui.theme.CurrentLocationSampleTheme
 
 
@@ -23,35 +20,30 @@ fun GeoLocationHome(
     viewModel: GeoLocationHomeViewModel,
     modifier: Modifier = Modifier,
 ) {
-    val activity = LocalContext.current as Activity
+    GeoLocationHomePermissionGranted(viewModel = viewModel, modifier = modifier)
 
-    if (ActivityCompat.checkSelfPermission(
-            activity,
-            Manifest.permission.ACCESS_FINE_LOCATION
-        ) != PackageManager.PERMISSION_GRANTED
-    ) {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(
-                activity,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            )
-        ) {
-            // TODO: show UI
-            Log.d("MainActivity@", "shouldShowRequestPermissionRationale")
-        } else {
-            ActivityCompat.requestPermissions(
-                activity,
-                arrayOf(
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ),
-                GRANT_LOCATION_PERMISSION
-            )
-        }
-    }
+}
+
+@Composable
+fun GeoLocationHomePermissionGranted(
+    viewModel: GeoLocationHomeViewModel,
+    modifier: Modifier = Modifier,
+) {
     val rawLocationPayload by viewModel.locationPayload.observeAsState()
     val locationPayload = rawLocationPayload ?: viewModel.getEmptyLocationPayload()
     val geoLocationHomeState = rememberGeoLocationHomeState(locationPayload)
     StatefulGeoLocation(modifier, geoLocationHomeState) { viewModel.updateCurrentLocation() }
+}
+
+@Composable
+fun GeoLocationEmptyHome(
+    locationPayload: LocationPayload,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    val geoLocationHomeState = rememberGeoLocationHomeState(locationPayload)
+    StatefulGeoLocation(modifier, geoLocationHomeState) { onClick() }
+    Log.d("GeoLocationHome", "GeoLocationEmptyHome")
 }
 
 @Composable
