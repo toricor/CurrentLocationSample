@@ -12,17 +12,27 @@ class GeoLocationHomeViewModel(application: Application): AndroidViewModel(appli
     val locationPayload: LiveData<LocationPayload>
         get() = _locationPayload
 
+    private val _isLocationGranted = MutableLiveData<Boolean>(LocationPermission(application.applicationContext).isPermissionGranted)
+    val isLocationGranted: LiveData<Boolean>
+        get() = _isLocationGranted
+
+    fun updateGranted(changedTo: Boolean) {
+        _isLocationGranted.value = changedTo
+    }
+
     fun updateCurrentLocation() {
         viewModelScope.launch {
             _locationPayload.value = geoLocationRepository.getCurrentLocation()
         }
     }
 
+    /*
     fun updateLastLocation() {
         viewModelScope.launch {
             _locationPayload.value = geoLocationRepository.getLastLocation()
         }
     }
+     */
 
     fun getEmptyLocationPayload() : LocationPayload {
         return GeoLocationUtil.getEmptyLocationPayload()

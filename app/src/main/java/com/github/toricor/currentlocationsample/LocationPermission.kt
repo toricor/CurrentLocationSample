@@ -4,7 +4,7 @@ import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.Context
 import android.content.pm.PackageManager
-import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 
 class LocationPermission(private val context: Context?) {
     val isPermissionGranted: Boolean
@@ -12,7 +12,7 @@ class LocationPermission(private val context: Context?) {
 
     private fun isAccessFineLocationGranted(): Boolean {
         if (context == null) return false
-        return ActivityCompat.checkSelfPermission(
+        return ContextCompat.checkSelfPermission(
             context,
             ACCESS_FINE_LOCATION
         ) == PackageManager.PERMISSION_GRANTED
@@ -20,7 +20,7 @@ class LocationPermission(private val context: Context?) {
 
     private fun isAccessCoarseLocationGranted(): Boolean {
         if (context == null) return false
-        return ActivityCompat.checkSelfPermission(
+        return ContextCompat.checkSelfPermission(
             context,
             ACCESS_COARSE_LOCATION
         ) == PackageManager.PERMISSION_GRANTED
