@@ -20,12 +20,12 @@ fun GeoLocationHome(
     if (isLocationGranted == true) {
         val rawLocationPayload by viewModel.locationPayload.observeAsState()
         val locationPayload = rawLocationPayload ?: viewModel.getEmptyLocationPayload()
-        GeoLocationHomePermissionsGranted(
+        StatefulGeoLocation(
             locationPayload = locationPayload,
-            onClick = { viewModel.updateCurrentLocation()},
+            onClick = { viewModel.updateCurrentLocation() },
         )
     } else {
-        GeoLocationEmptyHome(
+        StatefulGeoLocation(
             locationPayload = viewModel.getEmptyLocationPayload(),
             onClick = { requestPermissionsOnClick() },
         )
@@ -33,40 +33,20 @@ fun GeoLocationHome(
 }
 
 @Composable
-fun GeoLocationHomePermissionsGranted(
-    locationPayload: LocationPayload,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    val geoLocationHomeState = rememberGeoLocationHomeState(locationPayload)
-    StatefulGeoLocation(modifier, geoLocationHomeState) { onClick() }
-}
-
-@Composable
-fun GeoLocationEmptyHome(
-    locationPayload: LocationPayload,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    val geoLocationHomeState = rememberGeoLocationHomeState(locationPayload)
-    StatefulGeoLocation(modifier, geoLocationHomeState) { onClick() }
-}
-
-@Composable
 fun StatefulGeoLocation(
-    modifier: Modifier = Modifier,
-    state: GeoLocationHomeState,
+    locationPayload: LocationPayload,
     onClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
-    val locationPayload = state.location
-
+    val geoLocationHomeState = rememberGeoLocationHomeState(locationPayload)
+    val location = geoLocationHomeState.location
     StatelessGeoLocation(
-        latitude = locationPayload.latitude,
-        longitude = locationPayload.longitude,
-        accuracy = locationPayload.accuracy,
-        time = locationPayload.time,
-        speed = locationPayload.speed,
-        mocked = locationPayload.mocked,
+        latitude = location.latitude,
+        longitude = location.longitude,
+        accuracy = location.accuracy,
+        time = location.time,
+        speed = location.speed,
+        mocked = location.mocked,
         onClick = onClick,
         modifier = modifier,
     )
