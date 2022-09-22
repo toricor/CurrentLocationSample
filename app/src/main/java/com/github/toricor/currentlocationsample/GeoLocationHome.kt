@@ -1,8 +1,6 @@
 package com.github.toricor.currentlocationsample
 
-import android.Manifest
 import android.util.Log
-import androidx.activity.result.ActivityResultLauncher
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
@@ -14,18 +12,26 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.github.toricor.currentlocationsample.ui.theme.CurrentLocationSampleTheme
 
-
 @Composable
 fun GeoLocationHome(
     viewModel: GeoLocationHomeViewModel,
-    modifier: Modifier = Modifier,
+    requestPermissionsOnClick: () -> Unit,
 ) {
-    GeoLocationHomePermissionGranted(viewModel = viewModel, modifier = modifier)
-
+    val isLocationGranted by viewModel.isLocationGranted.observeAsState()
+    if (isLocationGranted == true) {
+        GeoLocationHomePermissionsGranted(
+            viewModel = viewModel,
+        )
+    } else {
+        GeoLocationEmptyHome(
+            locationPayload = viewModel.getEmptyLocationPayload(),
+            onClick = { requestPermissionsOnClick() },
+        )
+    }
 }
 
 @Composable
-fun GeoLocationHomePermissionGranted(
+fun GeoLocationHomePermissionsGranted(
     viewModel: GeoLocationHomeViewModel,
     modifier: Modifier = Modifier,
 ) {

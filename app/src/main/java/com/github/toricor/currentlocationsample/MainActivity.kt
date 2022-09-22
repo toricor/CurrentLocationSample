@@ -11,8 +11,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.core.content.ContextCompat
 import com.github.toricor.currentlocationsample.ui.theme.CurrentLocationSampleTheme
@@ -31,7 +29,7 @@ class MainActivity : ComponentActivity() {
     private val requestMultiplePermissions =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
             permissions.entries.forEach {
-                Log.d("MainActivity: ", "${it.key} = ${it.value}")
+                Log.d("MainActivity:Permissions", "${it.key} = ${it.value}")
 
                 if (it.key == "android.permission.ACCESS_FINE_LOCATION") {
                     fineLocationPermission = it.value == true
@@ -76,24 +74,17 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    val isLocationGranted by viewModel.isLocationGranted.observeAsState()
-                    if (isLocationGranted == true) {
-                        GeoLocationHome(
-                            viewModel = viewModel,
-                        )
-                    } else {
-                        GeoLocationEmptyHome(
-                            locationPayload = viewModel.getEmptyLocationPayload(),
-                            onClick = {
-                                requestMultiplePermissions.launch(
-                                    arrayOf(
-                                        Manifest.permission.ACCESS_FINE_LOCATION,
-                                        Manifest.permission.ACCESS_COARSE_LOCATION
-                                    )
+                    GeoLocationHome(
+                        viewModel = viewModel,
+                        requestPermissionsOnClick = {
+                            requestMultiplePermissions.launch(
+                                arrayOf(
+                                    Manifest.permission.ACCESS_FINE_LOCATION,
+                                    Manifest.permission.ACCESS_COARSE_LOCATION
                                 )
-                            }
-                        )
-                    }
+                            )
+                        }
+                    )
                 }
             }
         }
