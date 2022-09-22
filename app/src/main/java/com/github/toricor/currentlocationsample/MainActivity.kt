@@ -18,7 +18,6 @@ import com.google.android.gms.common.GoogleApiAvailability
 
 
 const val GOOGLE_PLAY_SERVICES_VALIDATION = 1
-const val GRANT_LOCATION_PERMISSION = 2
 
 class MainActivity : ComponentActivity() {
     private var fineLocationPermission: Boolean = false

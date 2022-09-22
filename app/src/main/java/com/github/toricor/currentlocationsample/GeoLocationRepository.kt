@@ -19,6 +19,7 @@ class GeoLocationRepository(private val locationProvider: FusedLocationProviderC
         setMaxUpdateAgeMillis(30000L)
     }.build()
 
+    /*
     @SuppressLint("MissingPermission")
     suspend fun getLastLocation(): LocationPayload {
         val def = CompletableDeferred<LocationPayload>()
@@ -39,6 +40,7 @@ class GeoLocationRepository(private val locationProvider: FusedLocationProviderC
         }
         return def.await()
     }
+     */
 
     @SuppressLint("MissingPermission")
     suspend fun getCurrentLocation(): LocationPayload {
