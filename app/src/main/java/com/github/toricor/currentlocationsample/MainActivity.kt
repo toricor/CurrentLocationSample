@@ -27,6 +27,7 @@ class MainActivity : ComponentActivity() {
 
     private val requestMultiplePermissions =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+            val isGrantedBefore = fineLocationPermission && coarseLocationPermission
             permissions.entries.forEach {
                 Log.d("MainActivity:Permissions", "${it.key} = ${it.value}")
 
@@ -40,31 +41,18 @@ class MainActivity : ComponentActivity() {
             }
             val isGranted = fineLocationPermission && coarseLocationPermission
             viewModel.updateGranted(isGranted)
-        }
 
+            if (!isGrantedBefore && isGranted) {
+                viewModel.updateCurrentLocation()
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         validateGooglePlayServices(this)
 
         viewModel = GeoLocationHomeViewModel(application)
-
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            fineLocationPermission = true
-        }
-
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            coarseLocationPermission = true
-        }
-
+        updatePermissionStatuses()
 
         setContent {
             CurrentLocationSampleTheme {
@@ -86,6 +74,24 @@ class MainActivity : ComponentActivity() {
                     )
                 }
             }
+        }
+    }
+
+    private fun updatePermissionStatuses() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            fineLocationPermission = true
+        }
+
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            coarseLocationPermission = true
         }
     }
 
