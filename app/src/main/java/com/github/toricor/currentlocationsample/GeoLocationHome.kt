@@ -1,6 +1,5 @@
 package com.github.toricor.currentlocationsample
 
-import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
@@ -19,8 +18,11 @@ fun GeoLocationHome(
 ) {
     val isLocationGranted by viewModel.isLocationGranted.observeAsState()
     if (isLocationGranted == true) {
+        val rawLocationPayload by viewModel.locationPayload.observeAsState()
+        val locationPayload = rawLocationPayload ?: viewModel.getEmptyLocationPayload()
         GeoLocationHomePermissionsGranted(
-            viewModel = viewModel,
+            locationPayload = locationPayload,
+            onClick = { viewModel.updateCurrentLocation()},
         )
     } else {
         GeoLocationEmptyHome(
@@ -32,13 +34,12 @@ fun GeoLocationHome(
 
 @Composable
 fun GeoLocationHomePermissionsGranted(
-    viewModel: GeoLocationHomeViewModel,
+    locationPayload: LocationPayload,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val rawLocationPayload by viewModel.locationPayload.observeAsState()
-    val locationPayload = rawLocationPayload ?: viewModel.getEmptyLocationPayload()
     val geoLocationHomeState = rememberGeoLocationHomeState(locationPayload)
-    StatefulGeoLocation(modifier, geoLocationHomeState) { viewModel.updateCurrentLocation() }
+    StatefulGeoLocation(modifier, geoLocationHomeState) { onClick() }
 }
 
 @Composable
@@ -49,7 +50,6 @@ fun GeoLocationEmptyHome(
 ) {
     val geoLocationHomeState = rememberGeoLocationHomeState(locationPayload)
     StatefulGeoLocation(modifier, geoLocationHomeState) { onClick() }
-    Log.d("GeoLocationHome", "GeoLocationEmptyHome")
 }
 
 @Composable
