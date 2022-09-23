@@ -16,13 +16,19 @@ class GeoLocationHomeViewModel(application: Application): AndroidViewModel(appli
     val isLocationGranted: LiveData<Boolean>
         get() = _isLocationGranted
 
+    private val _isUpdating = MutableLiveData<Boolean>(false)
+    val isUpdating: LiveData<Boolean>
+        get() = _isUpdating
+
     fun updateGranted(changedTo: Boolean) {
         _isLocationGranted.value = changedTo
     }
 
     fun updateCurrentLocation() {
+        _isUpdating.value = true
         viewModelScope.launch {
             _locationPayload.value = geoLocationRepository.getCurrentLocation()
+            _isUpdating.value = false
         }
     }
 
