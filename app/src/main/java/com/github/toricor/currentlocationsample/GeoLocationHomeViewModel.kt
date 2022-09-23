@@ -3,6 +3,7 @@ package com.github.toricor.currentlocationsample
 import android.app.Application
 import androidx.lifecycle.*
 import com.google.android.gms.location.LocationServices
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class GeoLocationHomeViewModel(application: Application): AndroidViewModel(application) {
@@ -16,13 +17,19 @@ class GeoLocationHomeViewModel(application: Application): AndroidViewModel(appli
     val isLocationGranted: LiveData<Boolean>
         get() = _isLocationGranted
 
+    private val _isUpdating = MutableLiveData<Boolean>(false)
+    val isUpdating: LiveData<Boolean>
+        get() = _isUpdating
+
     fun updateGranted(changedTo: Boolean) {
         _isLocationGranted.value = changedTo
     }
 
     fun updateCurrentLocation() {
-        viewModelScope.launch {
-            _locationPayload.value = geoLocationRepository.getCurrentLocation()
+        _isUpdating.value = true
+        viewModelScope.launch(Dispatchers.Default) {
+            _locationPayload.postValue(geoLocationRepository.getCurrentLocation())
+            _isUpdating.postValue( false)
         }
     }
 
