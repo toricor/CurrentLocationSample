@@ -4,14 +4,14 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.github.toricor.currentlocationsample"
         minSdk 24
-        targetSdk 32
+        targetSdk 33
         versionCode 1
-        versionName "0.1"
+        versionName "0.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -25,7 +25,7 @@ android {
             debuggable = true
         }
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -47,6 +47,10 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+    lint {
+        baseline = file("lint-baseline.xml")
+    }
+    namespace 'com.github.toricor.currentlocationsample'
 }
 
 dependencies {
@@ -56,8 +60,9 @@ dependencies {
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
     implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
-    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1"
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1'
     implementation 'androidx.activity:activity-compose:1.3.1'
+    implementation 'androidx.fragment:fragment-ktx:1.4.1'
 
     implementation 'com.google.android.gms:play-services-location:20.0.0'
 
