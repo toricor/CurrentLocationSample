@@ -1,423 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<issues format="6" by="lint 7.2.2" type="baseline" client="gradle" dependencies="false" name="AGP (7.2.2)" variant="all" version="7.2.2">
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="InvalidFragmentVersionForActivityResult"
-        message="Upgrade Fragment version to at least 1.3.0."
-        errorLine1="        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->"
-        errorLine2="        ^">
-        <location
-            file="src/main/java/com/github/toricor/currentlocationsample/MainActivity.kt"
-            line="29"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="RedundantLabel"
-        message="Redundant label can be removed"
-        errorLine1="            android:label=&quot;@string/app_name&quot;"
-        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="src/main/AndroidManifest.xml"
-            line="22"
-            column="13"/>
-    </issue>
+<issues format="6" by="lint 7.3.0" type="baseline" client="gradle" dependencies="false" name="AGP (7.3.0)" variant="all" version="7.3.0">
 
     <issue
         id="GradleDependency"
@@ -426,7 +8,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="56"
+            line="57"
             column="20"/>
     </issue>
 
@@ -437,7 +19,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="57"
+            line="58"
             column="20"/>
     </issue>
 
@@ -448,7 +30,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="58"
+            line="59"
             column="20"/>
     </issue>
 
@@ -459,7 +41,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="59"
+            line="60"
             column="20"/>
     </issue>
 
@@ -470,7 +52,7 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="60"
+            line="61"
             column="20"/>
     </issue>
 
@@ -481,18 +63,18 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="61"
+            line="62"
             column="20"/>
     </issue>
 
     <issue
         id="GradleDependency"
         message="A newer version of androidx.lifecycle:lifecycle-viewmodel-compose than 2.4.1 is available: 2.5.1"
-        errorLine1="    implementation &quot;androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1&quot;"
+        errorLine1="    implementation &apos;androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1&apos;"
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="62"
+            line="63"
             column="20"/>
     </issue>
 
@@ -503,8 +85,52 @@
         errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="build.gradle"
-            line="63"
+            line="64"
             column="20"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.fragment:fragment-ktx than 1.4.1 is available: 1.5.3"
+        errorLine1="    implementation &apos;androidx.fragment:fragment-ktx:1.4.1&apos;"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="65"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.compose.ui:ui-test-junit4 than 1.1.0-beta01 is available: 1.3.0-beta03"
+        errorLine1="    androidTestImplementation &quot;androidx.compose.ui:ui-test-junit4:$compose_version&quot;"
+        errorLine2="                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="73"
+            column="31"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.compose.ui:ui-tooling than 1.1.0-beta01 is available: 1.3.0-beta03"
+        errorLine1="    debugImplementation &quot;androidx.compose.ui:ui-tooling:$compose_version&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="74"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.compose.ui:ui-test-manifest than 1.1.0-beta01 is available: 1.3.0-beta03"
+        errorLine1="    debugImplementation &quot;androidx.compose.ui:ui-test-manifest:$compose_version&quot;"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="75"
+            column="25"/>
     </issue>
 
     <issue
