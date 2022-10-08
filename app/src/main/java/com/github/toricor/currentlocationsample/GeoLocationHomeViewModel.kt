@@ -1,11 +1,13 @@
 package com.github.toricor.currentlocationsample
 
 import android.app.Application
+import androidx.compose.runtime.Stable
 import androidx.lifecycle.*
 import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+@Stable
 class GeoLocationHomeViewModel(application: Application): AndroidViewModel(application) {
     private val geoLocationRepository = GeoLocationRepository(LocationServices.getFusedLocationProviderClient(application.applicationContext))
 
