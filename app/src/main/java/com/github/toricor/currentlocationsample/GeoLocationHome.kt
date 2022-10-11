@@ -25,8 +25,8 @@ fun GeoLocationHome(
 
     val isLocationGranted by viewModel.isLocationGranted.observeAsState(false)
     if (isLocationGranted) {
-        val rawLocationPayload by viewModel.locationPayload.observeAsState()
-        locationPayload = rawLocationPayload ?: viewModel.getEmptyLocationPayload()
+        val rawLocationPayload by viewModel.locationPayload.observeAsState(viewModel.getEmptyLocationPayload())
+        locationPayload = rawLocationPayload
         onClick = { viewModel.updateCurrentLocation() }
     } else {
         locationPayload = viewModel.getEmptyLocationPayload()
