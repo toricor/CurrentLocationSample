@@ -55,6 +55,7 @@ fun StatelessGeoLocationWithLoading(
             mocked = locationPayload.mocked,
             onClick = onClick,
             modifier = modifier,
+            enabled = !isUpdating,
         )
         if (isUpdating) {
             Spacer(Modifier.height(8.dp))
@@ -71,6 +72,7 @@ fun StatelessGeoLocation(
     time: Long,
     speed: Float,
     mocked: Boolean,
+    enabled: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -83,7 +85,8 @@ fun StatelessGeoLocation(
         Text(text = "mocked: $mocked")
         Button(
             onClick = onClick,
-            Modifier.padding(top = 8.dp)
+            enabled = enabled,
+            modifier = Modifier.padding(top = 8.dp)
         ) {
             Text("Update Current Location")
         }
@@ -119,6 +122,30 @@ fun GeoLocationWithLoadingPreview() {
     group = "GeoLocationHome",
 )
 @Composable
+fun GeoLocationWithLoadingNotUpdatingPreview() {
+    CurrentLocationSampleTheme {
+        Surface {
+            StatelessGeoLocationWithLoading(
+                locationPayload = LocationPayload(
+                    latitude = 35.6809591,
+                    longitude = 139.7673068,
+                    accuracy = 12.589F,
+                    time = 1662194662614,
+                    speed = 50.03244F,
+                    mocked = false,
+                ),
+                onClick = {},
+                isUpdating = false,
+            )
+        }
+    }
+}
+
+@Preview(
+    showBackground = true,
+    group = "GeoLocationHome",
+)
+@Composable
 fun GeoLocationWithLoadingDarkPreview() {
     CurrentLocationSampleTheme(darkTheme = true) {
         Surface {
@@ -143,6 +170,30 @@ fun GeoLocationWithLoadingDarkPreview() {
     group = "GeoLocationHome",
 )
 @Composable
+fun GeoLocationWithLoadingNotUpdatingDarkPreview() {
+    CurrentLocationSampleTheme(darkTheme = true) {
+        Surface {
+            StatelessGeoLocationWithLoading(
+                locationPayload = LocationPayload(
+                    latitude = 35.6809591,
+                    longitude = 139.7673068,
+                    accuracy = 12.589F,
+                    time = 1662194662614,
+                    speed = 50.03244F,
+                    mocked = false,
+                ),
+                onClick = {},
+                isUpdating = false,
+            )
+        }
+    }
+}
+
+@Preview(
+    showBackground = true,
+    group = "GeoLocationHome",
+)
+@Composable
 fun GeoLocationPreview() {
     CurrentLocationSampleTheme {
         Surface {
@@ -154,6 +205,7 @@ fun GeoLocationPreview() {
                 speed = 50.03244F,
                 mocked = false,
                 onClick = {},
+                enabled = true,
             )
         }
     }
@@ -175,6 +227,7 @@ fun GeoLocationDarkPreview() {
                 speed = 50.03244F,
                 mocked = false,
                 onClick = {},
+                enabled = true,
             )
         }
     }
