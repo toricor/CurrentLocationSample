@@ -20,41 +20,21 @@ fun GeoLocationHome(
     viewModel: GeoLocationHomeViewModel,
     requestPermissionsOnClick: () -> Unit,
 ) {
-    val locationPayload: LocationPayload
-    val onClick: () -> Unit
-
     val isLocationGranted by viewModel.isLocationGranted.observeAsState(false)
-    if (isLocationGranted) {
-        val rawLocationPayload by viewModel.locationPayload.observeAsState(viewModel.getEmptyLocationPayload())
-        locationPayload = rawLocationPayload
-        onClick = { viewModel.updateCurrentLocation() }
-    } else {
-        locationPayload = viewModel.getEmptyLocationPayload()
-        onClick = { requestPermissionsOnClick() }
-    }
     val isUpdating by viewModel.isUpdating.observeAsState(false)
-
-    StatefulGeoLocation(
-        locationPayload = locationPayload,
-        onClick = { onClick() },
-        isUpdating = isUpdating,
-    )
-}
-
-@Composable
-fun StatefulGeoLocation(
-    locationPayload: LocationPayload,
-    onClick: () -> Unit,
-    isUpdating: Boolean,
-    modifier: Modifier = Modifier,
-) {
-    val geoLocationHomeState = rememberGeoLocationHomeState(locationPayload)
+    val rawLocationPayload by viewModel.locationPayload.observeAsState(viewModel.getEmptyLocationPayload())
+    val geoLocationHomeState = rememberGeoLocationHomeState(rawLocationPayload)
 
     StatelessGeoLocationWithLoading(
         locationPayload = geoLocationHomeState.location,
-        onClick = { onClick() },
+        onClick = {
+            if (isLocationGranted) {
+                viewModel.updateCurrentLocation()
+            } else {
+                requestPermissionsOnClick()
+            }
+        },
         isUpdating = isUpdating,
-        modifier = modifier,
     )
 }
 
@@ -76,8 +56,8 @@ fun StatelessGeoLocationWithLoading(
             onClick = onClick,
             modifier = modifier,
         )
-        Spacer(Modifier.height(8.dp))
         if (isUpdating) {
+            Spacer(Modifier.height(8.dp))
             CircularProgressIndicator()
         }
     }
