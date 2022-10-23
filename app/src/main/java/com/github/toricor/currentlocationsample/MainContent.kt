@@ -1,6 +1,5 @@
 package com.github.toricor.currentlocationsample
 
-import android.Manifest
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
