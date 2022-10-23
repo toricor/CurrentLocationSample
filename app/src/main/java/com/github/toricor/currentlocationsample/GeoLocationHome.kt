@@ -4,21 +4,94 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Button
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBox
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import com.github.toricor.currentlocationsample.ui.theme.CurrentLocationSampleTheme
+
+
+@Composable
+fun TopBar(
+    title: String,
+) {
+    TopAppBar(
+        title = { Text(text = title) },
+        backgroundColor = MaterialTheme.colors.primary
+    )
+}
+
+@Composable
+fun BottomBar(navController: NavController) {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
+
+    BottomNavigation(elevation = 10.dp) {
+        BottomNavigationItem(
+            selected = currentDestination?.hierarchy?.any { it.route == "Home" } == true,
+            onClick = { navController.navigate("Home") },
+            icon = { Icon(imageVector = Icons.Default.Home, contentDescription = "Home") },
+            label = { Text(text = "Home") }
+        )
+        BottomNavigationItem(
+            selected = currentDestination?.hierarchy?.any { it.route == "Favorite" } == true,
+            onClick = { navController.navigate("Favorite") },
+            icon = { Icon(imageVector = Icons.Default.AccountBox, contentDescription = "Favorite") },
+            label = { Text(text = "Favorite") }
+        )
+    }
+}
+
+@Composable
+fun Favorite() {
+    Text("favorite")
+}
 
 @Composable
 fun GeoLocationHome(
     viewModel: GeoLocationHomeViewModel,
     requestPermissionsOnClick: () -> Unit,
+) {
+    val scaffoldState = rememberScaffoldState(rememberDrawerState(DrawerValue.Open))
+    val navController = rememberNavController()
+
+    Scaffold(
+        scaffoldState = scaffoldState,
+        topBar = { TopBar(title = "CurrentLocation") },
+        bottomBar = { BottomBar(navController) },
+    ) { paddingValues ->
+        NavHost(navController = navController, startDestination = "Home") {
+            composable("Home") {
+                GeoLocationMainContent(
+                    viewModel = viewModel,
+                    requestPermissionsOnClick = requestPermissionsOnClick,
+                    modifier = Modifier.padding(paddingValues),
+                )
+            }
+            composable("Favorite") {
+                Favorite()
+            }
+        }
+    }
+}
+
+@Composable
+fun GeoLocationMainContent(
+    viewModel: GeoLocationHomeViewModel,
+    requestPermissionsOnClick: () -> Unit,
+    modifier: Modifier,
 ) {
     val isLocationGranted by viewModel.isLocationGranted.observeAsState(false)
     val isUpdating by viewModel.isUpdating.observeAsState(false)
@@ -37,6 +110,7 @@ fun GeoLocationHome(
         isUpdating = isUpdating,
     )
 }
+
 
 @Composable
 fun StatelessGeoLocationWithLoading(
