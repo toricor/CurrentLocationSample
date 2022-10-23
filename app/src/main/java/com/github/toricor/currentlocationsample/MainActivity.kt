@@ -11,8 +11,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.core.content.ContextCompat
 import com.github.toricor.currentlocationsample.ui.theme.CurrentLocationSampleTheme
@@ -57,25 +55,6 @@ class MainActivity : ComponentActivity() {
         updatePermissionStatuses()
 
         setContent {
-            val isLocationGranted by viewModel.isLocationGranted.observeAsState(false)
-            val isUpdating by viewModel.isUpdating.observeAsState(false)
-            val rawLocationPayload by viewModel.locationPayload.observeAsState(viewModel.getEmptyLocationPayload())
-            val geoLocationHomeState = rememberGeoLocationHomeState(rawLocationPayload)
-
-            val locationPayload = geoLocationHomeState.location
-            val onClick = {
-                if (isLocationGranted) {
-                    viewModel.updateCurrentLocation()
-                } else {
-                    requestMultiplePermissions.launch(
-                        arrayOf(
-                            Manifest.permission.ACCESS_FINE_LOCATION,
-                            Manifest.permission.ACCESS_COARSE_LOCATION
-                        )
-                    )
-                }
-            }
-
             CurrentLocationSampleTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
@@ -83,9 +62,15 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     MainContent(
-                        locationPayload = locationPayload,
-                        isUpdating = isUpdating,
-                        onClick = onClick,
+                        viewModel = viewModel,
+                        requestPermissionsOnClick = {
+                            requestMultiplePermissions.launch(
+                                arrayOf(
+                                    Manifest.permission.ACCESS_FINE_LOCATION,
+                                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                                )
+                            )
+                        },
                     )
                 }
             }

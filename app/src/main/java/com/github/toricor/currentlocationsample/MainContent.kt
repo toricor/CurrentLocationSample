@@ -1,10 +1,12 @@
 package com.github.toricor.currentlocationsample
 
+import android.Manifest
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -56,6 +58,31 @@ fun Places() {
 
 @Composable
 fun MainContent(
+    viewModel: GeoLocationHomeViewModel,
+    requestPermissionsOnClick: () -> Unit,
+) {
+    val isLocationGranted by viewModel.isLocationGranted.observeAsState(false)
+    val isUpdating by viewModel.isUpdating.observeAsState(false)
+    val rawLocationPayload by viewModel.locationPayload.observeAsState(viewModel.getEmptyLocationPayload())
+    val geoLocationHomeState = rememberGeoLocationHomeState(rawLocationPayload)
+
+    val locationPayload = geoLocationHomeState.location
+
+    LocationStatelessMainContent(
+        locationPayload = locationPayload,
+        isUpdating = isUpdating,
+        onClick = {
+            if (isLocationGranted) {
+                viewModel.updateCurrentLocation()
+            } else {
+                requestPermissionsOnClick()
+            }
+        },
+    )
+}
+
+@Composable
+fun LocationStatelessMainContent(
     locationPayload: LocationPayload,
     isUpdating: Boolean,
     onClick: () -> Unit,
@@ -88,7 +115,7 @@ fun MainContent(
 @Composable
 fun DefaultPreview() {
     CurrentLocationSampleTheme {
-        MainContent(
+        LocationStatelessMainContent(
             isUpdating = true,
             onClick = {},
             locationPayload = LocationPayload(
