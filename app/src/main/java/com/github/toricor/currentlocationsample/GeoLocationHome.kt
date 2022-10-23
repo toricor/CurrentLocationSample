@@ -4,42 +4,16 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Button
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.github.toricor.currentlocationsample.ui.theme.CurrentLocationSampleTheme
 
+
 @Composable
 fun GeoLocationHome(
-    viewModel: GeoLocationHomeViewModel,
-    requestPermissionsOnClick: () -> Unit,
-) {
-    val isLocationGranted by viewModel.isLocationGranted.observeAsState(false)
-    val isUpdating by viewModel.isUpdating.observeAsState(false)
-    val rawLocationPayload by viewModel.locationPayload.observeAsState(viewModel.getEmptyLocationPayload())
-    val geoLocationHomeState = rememberGeoLocationHomeState(rawLocationPayload)
-
-    StatelessGeoLocationWithLoading(
-        locationPayload = geoLocationHomeState.location,
-        onClick = {
-            if (isLocationGranted) {
-                viewModel.updateCurrentLocation()
-            } else {
-                requestPermissionsOnClick()
-            }
-        },
-        isUpdating = isUpdating,
-    )
-}
-
-@Composable
-fun StatelessGeoLocationWithLoading(
     locationPayload: LocationPayload,
     onClick: () -> Unit,
     isUpdating: Boolean,
@@ -101,7 +75,7 @@ fun StatelessGeoLocation(
 fun GeoLocationWithLoadingPreview() {
     CurrentLocationSampleTheme {
         Surface {
-            StatelessGeoLocationWithLoading(
+            GeoLocationHome(
                 locationPayload = LocationPayload(
                     latitude = 35.6809591,
                     longitude = 139.7673068,
@@ -125,7 +99,7 @@ fun GeoLocationWithLoadingPreview() {
 fun GeoLocationWithLoadingNotUpdatingPreview() {
     CurrentLocationSampleTheme {
         Surface {
-            StatelessGeoLocationWithLoading(
+            GeoLocationHome(
                 locationPayload = LocationPayload(
                     latitude = 35.6809591,
                     longitude = 139.7673068,
@@ -146,10 +120,10 @@ fun GeoLocationWithLoadingNotUpdatingPreview() {
     group = "GeoLocationHome",
 )
 @Composable
-fun GeoLocationWithLoadingDarkPreview() {
+fun GeoLocationDarkPreview() {
     CurrentLocationSampleTheme(darkTheme = true) {
         Surface {
-            StatelessGeoLocationWithLoading(
+            GeoLocationHome(
                 locationPayload = LocationPayload(
                     latitude = 35.6809591,
                     longitude = 139.7673068,
@@ -170,10 +144,10 @@ fun GeoLocationWithLoadingDarkPreview() {
     group = "GeoLocationHome",
 )
 @Composable
-fun GeoLocationWithLoadingNotUpdatingDarkPreview() {
+fun GeoLocationNotUpdatingDarkPreview() {
     CurrentLocationSampleTheme(darkTheme = true) {
         Surface {
-            StatelessGeoLocationWithLoading(
+            GeoLocationHome(
                 locationPayload = LocationPayload(
                     latitude = 35.6809591,
                     longitude = 139.7673068,

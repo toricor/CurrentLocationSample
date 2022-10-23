@@ -61,16 +61,16 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    GeoLocationHome(
+                    MainContent(
                         viewModel = viewModel,
                         requestPermissionsOnClick = {
                             requestMultiplePermissions.launch(
                                 arrayOf(
                                     Manifest.permission.ACCESS_FINE_LOCATION,
-                                    Manifest.permission.ACCESS_COARSE_LOCATION
+                                    Manifest.permission.ACCESS_COARSE_LOCATION,
                                 )
                             )
-                        }
+                        },
                     )
                 }
             }
