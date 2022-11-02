@@ -2,6 +2,8 @@
 android-compileSdk = "33"
 android-targetSdk = "33"
 android-minSdk = "24"
+kotlin = "1.7.20"
+androidGradlePlugin = "7.3.1"
 
 androidxComposeBom = "2022.10.00"
 androidxLifecycle = "2.5.1"
@@ -38,5 +40,9 @@ androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version
 androidx-test-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidxTestEspresso" }
 androidx-test-rules = { group = "androidx.test", name = "rules", version.ref = "androidxTest" }
 
+android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
+kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 
 [plugins]
+android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
