@@ -71,8 +71,10 @@ dependencies {
     // Optional - Integration with ViewModels
     implementation libs.androidx.lifecycle.viewmodel.compose
     // Optional - Integration with LiveData
-
     implementation libs.androidx.compose.runtime.livedata
+
+    // For AppWidgets support
+    implementation libs.androidx.glance.appwidget
 
     implementation libs.androidx.core.ktx
     implementation libs.androidx.navigation.compose

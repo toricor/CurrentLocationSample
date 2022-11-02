@@ -9,12 +9,13 @@ androidxComposeBom = "2022.10.00"
 androidxLifecycle = "2.5.1"
 androidxCore = "1.9.0"
 androidxNavigation = "2.5.2"
-androidxFragment = "1.5.3"g
+androidxFragment = "1.5.3"
 location = "21.0.0"
 junit = "4.13.2"
 androidxTestExt = "1.1.3"
 androidxTestEspresso = "3.4.0"
 androidxTest = "1.4.0"
+glance = "1.0.0-alpha05"
 
 [libraries]
 # compose
@@ -34,6 +35,7 @@ androidx-navigation-compose = { module = "androidx.navigation:navigation-compose
 androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidxLifecycle" }
 androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "androidxFragment" }
 com-google-android-gms-play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "location" }
+androidx-glance-appwidget = { group = "androidx.glance", name = "glance-appwidget", version.ref = "glance" }
 
 # test
 junit = { group = "junit", name = "junit", version.ref = "junit" }
