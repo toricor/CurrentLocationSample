@@ -1,4 +1,8 @@
 [versions]
+android-compileSdk = "33"
+android-targetSdk = "33"
+android-minSdk = "24"
+
 androidxComposeBom = "2022.10.00"
 androidxLifecycle = "2.5.1"
 androidxCore = "1.9.0"
