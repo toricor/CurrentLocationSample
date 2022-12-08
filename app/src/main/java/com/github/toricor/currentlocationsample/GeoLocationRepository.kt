@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.location.Location
 import android.os.Build
 import android.util.Log
+import androidx.core.location.LocationCompat
 import com.google.android.gms.location.CurrentLocationRequest
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.Priority
@@ -71,7 +72,6 @@ class GeoLocationRepository(private val locationProvider: FusedLocationProviderC
         }
     }
 
-    @Suppress("DEPRECATION")
     private fun buildLocationPayload(location: Location): LocationPayload {
         return LocationPayload(
             latitude = location.latitude,
@@ -82,7 +82,9 @@ class GeoLocationRepository(private val locationProvider: FusedLocationProviderC
             mocked = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 location.isMock
             } else {
-                location.isFromMockProvider
+                // Use Location.isMock() on Android S and above, otherwise use LocationCompat.isMock() from the compat libraries instead.
+                // https://developers.google.com/android/reference/com/google/android/gms/location/FusedLocationProviderClient#constant-summary
+                LocationCompat.isMock(location)
             },
         )
     }
