@@ -8,14 +8,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Stable
-class GeoLocationHomeViewModel(application: Application): AndroidViewModel(application) {
-    private val geoLocationRepository = GeoLocationRepository(LocationServices.getFusedLocationProviderClient(application.applicationContext))
+class GeoLocationHomeViewModel(application: Application) : AndroidViewModel(application) {
+    private val geoLocationRepository =
+        GeoLocationRepository(LocationServices.getFusedLocationProviderClient(application.applicationContext))
 
     private val _locationPayload = MutableLiveData<LocationPayload>(getEmptyLocationPayload())
     val locationPayload: LiveData<LocationPayload>
         get() = _locationPayload
 
-    private val _isLocationGranted = MutableLiveData<Boolean>(LocationPermission(application.applicationContext).isPermissionGranted)
+    private val _isLocationGranted =
+        MutableLiveData<Boolean>(LocationPermission(application.applicationContext).isPermissionGranted)
     val isLocationGranted: LiveData<Boolean>
         get() = _isLocationGranted
 
@@ -31,7 +33,7 @@ class GeoLocationHomeViewModel(application: Application): AndroidViewModel(appli
         _isUpdating.value = true
         viewModelScope.launch(Dispatchers.Default) {
             _locationPayload.postValue(geoLocationRepository.getCurrentLocation())
-            _isUpdating.postValue( false)
+            _isUpdating.postValue(false)
         }
     }
 
@@ -43,7 +45,7 @@ class GeoLocationHomeViewModel(application: Application): AndroidViewModel(appli
     }
      */
 
-    fun getEmptyLocationPayload() : LocationPayload {
+    fun getEmptyLocationPayload(): LocationPayload {
         return GeoLocationUtil.getEmptyLocationPayload()
     }
 }
