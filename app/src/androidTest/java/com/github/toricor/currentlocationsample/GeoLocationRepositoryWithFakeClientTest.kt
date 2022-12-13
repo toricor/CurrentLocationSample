@@ -12,6 +12,7 @@ import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
+import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -19,6 +20,15 @@ import java.util.concurrent.Executor
 
 class FakeFusedLocationProviderClient : FusedLocationProviderClient {
     var shouldFail = false
+
+    private val location = Location("mock").apply {
+        latitude = 35.6812362
+        longitude = 139.7671248
+        speed = 42.0F
+        accuracy = 0.68f
+        time = System.currentTimeMillis()
+        elapsedRealtimeNanos = SystemClock.elapsedRealtimeNanos()
+    }
 
     override fun getApiKey(): ApiKey<Api.ApiOptions.NoOptions> {
         TODO("Not yet implemented")
@@ -36,14 +46,6 @@ class FakeFusedLocationProviderClient : FusedLocationProviderClient {
         p0: CurrentLocationRequest,
         p1: CancellationToken?
     ): Task<Location> {
-        val location = Location("gps").apply {
-            latitude = 35.6812362
-            longitude = 139.7671248
-            speed = 42.0F
-            accuracy = 0.68f
-            time = System.currentTimeMillis()
-            elapsedRealtimeNanos = SystemClock.elapsedRealtimeNanos()
-        }
         return if (shouldFail) {
             Tasks.forException(Exception())
         } else {
@@ -127,6 +129,11 @@ class GeoLocationRepositoryWithFakeClientTest {
     @Before
     fun setupClient() {
         fakeClient = FakeFusedLocationProviderClient()
+    }
+
+    @After
+    fun tearDown() {
+        fakeClient.shouldFail = false
     }
 
     @Test
