@@ -20,29 +20,6 @@ class GeoLocationRepository(private val locationProvider: FusedLocationProviderC
         setMaxUpdateAgeMillis(30000L)
     }.build()
 
-    /*
-    @SuppressLint("MissingPermission")
-    suspend fun getLastLocation(): LocationPayload {
-        val def = CompletableDeferred<LocationPayload>()
-        val locationTask: Task<Location> = locationProvider.lastLocation
-
-        locationTask.addOnSuccessListener { location: Location? ->
-            Log.d("GeoLocationRepository@getLastLocation: ", location.toString())
-            def.complete(
-                if (location == null) {
-                    getEmptyLocationPayload()
-                } else {
-                    buildLocationPayload(location)
-                }
-            )
-        }
-        locationTask.addOnFailureListener {
-            def.complete(getEmptyLocationPayload())
-        }
-        return def.await()
-    }
-     */
-
     @SuppressLint("MissingPermission")
     suspend fun getCurrentLocation(): LocationPayload {
         val def = CompletableDeferred<LocationPayload>()
@@ -52,7 +29,6 @@ class GeoLocationRepository(private val locationProvider: FusedLocationProviderC
         )
 
         locationTask.addOnSuccessListener { location: Location? ->
-            Log.d("GeoLocationRepository@getCurrentLocation", location.toString())
             def.complete(
                 if (location == null) {
                     getEmptyLocationPayload()
@@ -62,7 +38,8 @@ class GeoLocationRepository(private val locationProvider: FusedLocationProviderC
             )
         }
         locationTask.addOnFailureListener {
-            def.completeExceptionally(it)
+            Log.d("GeoLocationRepository","FailureListener @@@@@@")
+            def.complete(getEmptyLocationPayload())
         }
 
         return try {
