@@ -132,8 +132,8 @@ class GeoLocationRepositoryWithFakeClientTest {
     @Test
     fun latitudeIsCorrect() {
         runTest {
-            val location = GeoLocationRepository(fakeClient).getCurrentLocation()
-            assertEquals(35.6812362, location.latitude, 0.0001)
+            val acquiredLocation = GeoLocationRepository(fakeClient).getCurrentLocation()
+            assertEquals(35.6812362, acquiredLocation.latitude, 0.0001)
         }
     }
 
@@ -141,8 +141,8 @@ class GeoLocationRepositoryWithFakeClientTest {
     fun zeroLatitudeIsAcquiredWhenFail() {
         runTest {
             fakeClient.shouldFail = true
-            val location = GeoLocationRepository(fakeClient).getCurrentLocation()
-            assertEquals(0.0, location.latitude, 0.0001)
+            val acquiredLocation = GeoLocationRepository(fakeClient).getCurrentLocation()
+            assertEquals(0.0, acquiredLocation.latitude, 0.0001)
         }
     }
 }
