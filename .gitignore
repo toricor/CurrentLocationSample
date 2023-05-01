@@ -13,6 +13,7 @@
 .idea/assetWizardSettings.xml
 .idea/gradle.xml
 .idea/kotlinc.xml
+.idea/compiler.xml
 .DS_Store
 /build
 /captures
