@@ -85,4 +85,6 @@ dependencies {
     androidTestImplementation libs.androidx.test.ext.junit
     androidTestImplementation libs.androidx.test.espresso.core
     androidTestImplementation libs.androidx.test.rules
+
+    androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
 }
